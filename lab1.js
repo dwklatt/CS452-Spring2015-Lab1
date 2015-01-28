@@ -1,4 +1,4 @@
-
+//Derek Klatt, 1/27, The First Lab
 var gl;
 var points;
 
@@ -8,7 +8,9 @@ window.onload = function init()
     
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) { alert( "WebGL isn't available" ); }
-
+    
+    //square
+    var vertices = [ vec2(-0.5, -0.5),vec2(-0.5, 0.5),vec2(0.5, 0.5),vec2(0.5, -0.5)];
 
     //
     //  Configure WebGL
@@ -22,8 +24,12 @@ window.onload = function init()
     gl.useProgram( program );
     
     // Load the data into the GPU
-
+    var bufferId = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(vertices), gl.STATIC_DRAW);
     // Associate our shader variables with our data buffer
+    var vPosition = gl.getAttribLocation(program, "vPosition");
+    gl.enableVertexAttribArray(vPosition);
 
     render();
 };
@@ -31,4 +37,5 @@ window.onload = function init()
 
 function render() {
     gl.clear( gl.COLOR_BUFFER_BIT );
+    //gl.drawArrays(gl.TRIANGLE_FAN,0,4);
 }
