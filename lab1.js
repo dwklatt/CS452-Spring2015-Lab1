@@ -1,3 +1,4 @@
+//Derek Klatt 1/27 Lab 1
 var gl;
 var points;
 var index = 0;
